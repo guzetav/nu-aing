@@ -1,0 +1,31 @@
+{ config, pkgs, ... }:
+
+{
+  # Ganti dengan username kamu
+  home.username = "gustav";
+  home.homeDirectory = "/home/gustav";
+
+  # Jangan diubah kecuali kamu tahu apa yang kamu lakukan
+  home.stateVersion = "24.11"; 
+
+  # Paket-paket user
+  home.packages = with pkgs; [
+    neofetch
+  ];
+
+  # Konfigurasi Git (Versi Terbaru agar tidak warning)
+  programs.git = {
+    enable = true;
+    settings = {
+      user = {
+        name = "guzetav"; # Ganti nama kamu
+        email = "agelegend@yahoo.com"; # Ganti email kamu
+      };
+    };
+    signing.format = "openpgp";
+  };
+
+  # Program Home Manager itu sendiri
+  programs.home-manager.enable = true;
+
+}
