@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+ config, pkgs, ... }:
 
 {
   # Ganti dengan username kamu
@@ -10,7 +10,7 @@
 
   # Paket-paket user
   home.packages = with pkgs; [
-    
+    neofetch
   ];
 
   # Konfigurasi Git (Versi Terbaru agar tidak warning)
