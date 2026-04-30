@@ -41,12 +41,13 @@
   themePackages = [
     (pkgs.stdenv.mkDerivation {
       name = "onepiece-theme";
-      src = /home/gustav/Downloads/onepiece; 
+      # Gunakan path relatif ./themes/onepiece
+      src = ./themes/onepiece; 
+      
       installPhase = ''
         mkdir -p $out/share/plymouth/themes/onepiece
         cp -r * $out/share/plymouth/themes/onepiece/
-        
-        # Perintah ajaib untuk otomatis mengganti /usr/share ke path Nix Store yang benar
+        # Memperbaiki path di dalam file .plymouth
         sed -i "s|/usr/share/plymouth/themes|$out/share/plymouth/themes|g" $out/share/plymouth/themes/onepiece/onepiece.plymouth
       '';
     })
