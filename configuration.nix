@@ -36,7 +36,6 @@
   ];  
   boot.consoleLogLevel = 0;
   boot.initrd.verbose = false;
-  boot.plymouth.enable = true;
   boot.plymouth = {
     enable = true;
     themePackages = [ adi1090x-plymouth-themes ];
