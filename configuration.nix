@@ -37,10 +37,22 @@
   boot.consoleLogLevel = 0;
   boot.initrd.verbose = false;
   boot.plymouth = {
-    enable = true;
-    themePackages = [ pkgs.adi1090x-plymouth-themes ];
-    theme = "darth_vader"; # Ganti dengan nama tema yang ada di paket tersebut
-  };
+  enable = true;
+  themePackages = [
+    (pkgs.stdenv.mkDerivation {
+      name = "onepiece-theme";
+      src = /home/gustav/Downloads/onepiece; 
+      installPhase = ''
+        mkdir -p $out/share/plymouth/themes/onepiece
+        cp -r * $out/share/plymouth/themes/onepiece/
+        
+        # Perintah ajaib untuk otomatis mengganti /usr/share ke path Nix Store yang benar
+        sed -i "s|/usr/share/plymouth/themes|$out/share/plymouth/themes|g" $out/share/plymouth/themes/onepiece/onepiece.plymouth
+      '';
+    })
+  ];
+  theme = "onepiece";
+};
 
   hardware.enableAllFirmware = true;
 
