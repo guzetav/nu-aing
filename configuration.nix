@@ -42,9 +42,6 @@
     theme = "Darth Vader"; # Ganti dengan nama tema yang ada di paket tersebut
   };
 
-
-
-  boot.plymouth.theme = "fade-in";
   hardware.enableAllFirmware = true;
 
   # --- BOOTSCREEN ---
