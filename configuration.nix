@@ -38,7 +38,7 @@
   boot.initrd.verbose = false;
   boot.plymouth = {
     enable = true;
-    themePackages = [ adi1090x-plymouth-themes ];
+    themePackages = [ pkgs.adi1090x-plymouth-themes ];
     theme = "cuts"; # Ganti dengan nama tema yang ada di paket tersebut
   };
 
