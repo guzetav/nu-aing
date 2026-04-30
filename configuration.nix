@@ -39,7 +39,7 @@
   boot.plymouth = {
     enable = true;
     themePackages = [ adi1090x-plymouth-themes ];
-    theme = "Darth Vader"; # Ganti dengan nama tema yang ada di paket tersebut
+    theme = "cuts"; # Ganti dengan nama tema yang ada di paket tersebut
   };
 
   hardware.enableAllFirmware = true;
