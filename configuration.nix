@@ -17,7 +17,7 @@
   systemd.services.samba-smbd.wantedBy = lib.mkForce [ "multi-user.target" ];
 
   system.stateVersion = "25.11";
-
+  nix.settings.trusted-users = [ "root" "gustav" ]; 
  
     
   # Load driver AMD lebih awal (Early KMS) agar resolusi tinggi dari awal boot
@@ -37,6 +37,14 @@
   boot.consoleLogLevel = 0;
   boot.initrd.verbose = false;
   boot.plymouth.enable = true;
+  boot.plymouth = {
+    enable = true;
+    themePackages = [ pkgs.adi1090x-plymouth-themes ];
+    theme = "Darth Vader"; # Ganti dengan nama tema yang ada di paket tersebut
+  };
+
+
+
   boot.plymouth.theme = "fade-in";
   hardware.enableAllFirmware = true;
 
@@ -274,6 +282,8 @@ fileSystems."/home/gustav/Games" = {
   };
   programs.gamemode.enable = true;
 
+#=====
+
   programs.zsh = {
     enable = true;
     enableCompletion = true;
@@ -294,11 +304,15 @@ fileSystems."/home/gustav/Games" = {
       c = "sudo xed /etc/nixos/configuration.nix"; 
       h = "sudo xed /etc/nixos/home.nix";
       f = "sudo xed /etc/nixos/flake.nix";
-      r = "cd /etc/nixos && sudo git add . && sudo nixos-rebuild switch --flake .";
+      r="cd /etc/nixos && sudo git add . && sudo git commit -m 'update' && sudo nixos-rebuild switch --flake . && git push origin main";
       re = "reboot";
       clean = "sudo nix-collect-garbage -d && sudo nix-store --optimise";
     };
   };
+
+#===== SSH Github ===
+    
+
 
   # --- ENVIRONMENT SYSTEM PACKAGES ---
   environment.systemPackages = with pkgs; [
