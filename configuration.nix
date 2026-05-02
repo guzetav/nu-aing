@@ -66,10 +66,7 @@
   # --- VIRTUALISASI (KVM & Libvirtd) ---
   virtualisation = {
   libvirtd.enable = true;
-  virtualbox.host = {
-    enable = true;
-    enableExtensionPack = true;
-  };
+  
 };
 
 security.polkit.enable = true;
