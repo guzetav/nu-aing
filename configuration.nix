@@ -37,14 +37,14 @@
   boot.consoleLogLevel = 0;
   boot.initrd.verbose = false;
   boot.plymouth = {
-  enable = true;
-  themePackages = [
-    (pkgs.stdenv.mkDerivation {
-      name = "onepiece-theme";
-      # Gunakan path relatif ./themes/onepiece
-      src = ./themes/onepiece; 
+    enable = true;
+    themePackages = [
+        (pkgs.stdenv.mkDerivation {
+            name = "onepiece-theme";
+            # Gunakan path relatif ./themes/onepiece
+            src = ./themes/onepiece; 
       
-      installPhase = ''
+     installPhase = ''
         mkdir -p $out/share/plymouth/themes/onepiece
         cp -r * $out/share/plymouth/themes/onepiece/
         # Memperbaiki path di dalam file .plymouth
@@ -349,7 +349,10 @@ fileSystems."/home/gustav/Games" = {
     terminus_font
     pkgs.mint-themes
     ntfs3g
-    
+    gemini-cli    
+
+
+
   ];
 
   # --- FONTS ---
