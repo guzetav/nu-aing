@@ -304,7 +304,12 @@
     gnome-disk-utility gparted telegram-desktop gnome-software
     gnome-boxes virt-viewer samba cifs-utils numlockx
     xorg.xrdb terminus_font pkgs.mint-themes ntfs3g
-    gemini-cli zsh-completions bpytop
+    gemini-cli zsh-completions pkgs.bpytop
+
+
+
+
+
   ];
 
   fonts.packages = with pkgs; [
