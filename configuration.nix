@@ -72,11 +72,6 @@
   };
 };
 
-# Izin User
-users.users.gustav = {
-  extraGroups = [ "wheel" "networkmanager" "vboxusers" "libvirtd" ];
-};
-
 security.polkit.enable = true;
 
   # --- NETWORKING & KERNEL OPTIMIZATION ---
@@ -235,7 +230,7 @@ security.polkit.enable = true;
   users.users.gustav = {
     isNormalUser = true;
     description = "gustav";
-    extraGroups = [ "networkmanager" "wheel" "libvirtd" "kvm" "samba" "video" "render" ];
+    extraGroups = [ "networkmanager" "wheel" "libvirtd" "kvm" "samba" "video" "render" "vboxusers"];
     shell = pkgs.zsh;
   };
 
