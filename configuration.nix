@@ -150,23 +150,23 @@
   # ============================================================================
   # 5. STORAGE & FILESYSTEMS (HDD & BTRFS)
   # ============================================================================
-fileSystems."/home/gustav" = {
-    device = "/dev/disk/by-uuid/5effb345-2ca3-4b79-ba6e-a6c519d1fe06";
+#fileSystems."/home/gustav" = {
+#    device = "/dev/disk/by-uuid/5effb345-2ca3-4b79-ba6e-a6c519d1fe06";
+#    fsType = "btrfs";
+#    options = [ "subvol=@home" "compress=zstd" "noatime" "discard=async" ];
+#  };
+
+  fileSystems."/home" = {
+    device = "/dev/disk/by-uuid/e11806d0-7a2f-438e-a180-8ecdc4210a4e";
     fsType = "btrfs";
-    options = [ "subvol=@home" "compress=zstd" "noatime" "discard=async" ];
+    options = [ "subvol=@home2" "compress=zstd" "noatime" "autodefrag" "space_cache=v2" ];
   };
 
-#  fileSystems."/home/gustav/Backup" = {
-#    device = "/dev/disk/by-uuid/e11806d0-7a2f-438e-a180-8ecdc4210a4e";
-#    fsType = "btrfs";
-#    options = [ "subvol=@home2" "compress=zstd" "noatime" "autodefrag" "space_cache=v2" ];
-#  };
-
-#  fileSystems."/home/gustav/Games" = {
-#    device = "/dev/disk/by-uuid/e11806d0-7a2f-438e-a180-8ecdc4210a4e";
-#    fsType = "btrfs";
-#    options = [ "subvol=@games" "compress=no" "noatime" "autodefrag" "space_cache=v2" "x-gvfs-hide" ];
-#  };
+  fileSystems."/home/gustav/Games" = {
+    device = "/dev/disk/by-uuid/e11806d0-7a2f-438e-a180-8ecdc4210a4e";
+    fsType = "btrfs";
+    options = [ "subvol=@games" "compress=no" "noatime" "autodefrag" "space_cache=v2" "x-gvfs-hide" ];
+  };
 
   # ============================================================================
   # 6. FILE SHARING (SAMBA & AVAHI)
