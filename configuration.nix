@@ -351,7 +351,7 @@ fileSystems."/home/gustav/Games" = {
     pkgs.mint-themes
     ntfs3g
     gemini-cli
-    zsh-completiions    
+    zsh-completions    
 
 
 
