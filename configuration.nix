@@ -282,7 +282,7 @@
       source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
     '';
     shellAliases = {
-      h = "sudo xed /etc/nixos/hardware-configuration.nix";
+      ho = "sudo xed /etc/nixos/hardware-configuration.nix";
       c = "sudo xed /etc/nixos/configuration.nix"; 
       h = "sudo xed /etc/nixos/home.nix";
       f = "sudo xed /etc/nixos/flake.nix";
