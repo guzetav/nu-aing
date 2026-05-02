@@ -299,7 +299,7 @@
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
-    google-chrome wget htop neofetch git
+    google-chrome wget htop fastfetch git
     zsh-powerlevel10k heroic xarchiver zip unzip p7zip
     gnome-disk-utility gparted telegram-desktop gnome-software
     gnome-boxes virt-viewer samba cifs-utils numlockx
