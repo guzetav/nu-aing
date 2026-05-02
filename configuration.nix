@@ -150,18 +150,74 @@
   # ============================================================================
   # 5. STORAGE & FILESYSTEMS (HDD & BTRFS)
   # ============================================================================
-#  fileSystems."/home" = {
-#    device = "/dev/disk/by-uuid/e11806d0-7a2f-438e-a180-8ecdc4210a4e";
-#    fsType = "btrfs";
-#    options = [ "subvol=@home2" "compress=zstd" "noatime" "autodefrag" "space_cache=v2" ];
-#  };
+  fileSystems."/mnt/hdd" = {
+    device = "/dev/disk/by-uuid/e11806d0-7a2f-438e-a180-8ecdc4210a4e";
+    fsType = "btrfs";
+    options = [ "subvol=@backup" "compress=zstd" "noatime" "autodefrag" "space_cache=v2" "x-gvfs-hide" ];
+  };
 
-  fileSystems."/home/gustav/Games" = {
+fileSystems."/home/gustav/Documents" = {
+  device = "/mnt/hdd/Documents";
+  fsType = "none";
+  options = [ "bind" "x-gvfs-hide"];
+  
+};
+
+fileSystems."/home/gustav/Downloads" = {
+  device = "/mnt/hdd/Downloads";
+  fsType = "none";
+  options = [ "bind" ];
+  
+};
+
+fileSystems."/home/gustav/Games" = {
     device = "/dev/disk/by-uuid/e11806d0-7a2f-438e-a180-8ecdc4210a4e";
     fsType = "btrfs";
     options = [ "subvol=@games" "compress=no" "noatime" "autodefrag" "space_cache=v2" "x-gvfs-hide" ];
   };
 
+fileSystems."/home/gustav/Handphone" = {
+  device = "/mnt/hdd/Handphone";
+  fsType = "none";
+  options = [ "bind" ];
+  
+};
+
+fileSystems."/home/gustav/Music" = {
+  device = "/mnt/hdd/Music";
+  fsType = "none";
+  options = [ "bind" ];
+  
+};
+
+fileSystems."/home/gustav/Pictures" = {
+  device = "/mnt/hdd/Pictures";
+  fsType = "none";
+  options = [ "bind" ];
+  
+};
+
+fileSystems."/home/gustav/Software" = {
+  device = "/mnt/hdd/Software";
+  fsType = "none";
+  options = [ "bind" ];
+  
+};
+
+fileSystems."/home/gustav/TomoTrading" = {
+  device = "/mnt/hdd/TomoTrading";
+  fsType = "none";
+  options = [ "bind" ];
+  
+};
+
+fileSystems."/home/gustav/Videos" = {
+  device = "/mnt/hdd/Videos";
+  fsType = "none";
+  options = [ "bind" ];
+  
+};
+  
   # ============================================================================
   # 6. FILE SHARING (SAMBA & AVAHI)
   # ============================================================================
