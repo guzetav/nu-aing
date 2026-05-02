@@ -19,11 +19,11 @@
       options = [ "subvol=@" ];
     };
 
-  fileSystems."/home" =
-    { device = "/dev/disk/by-uuid/e11806d0-7a2f-438e-a180-8ecdc4210a4e";
-      fsType = "btrfs";
-      options = [ "subvol=@home2" ];
-    };
+#  fileSystems."/home" =
+#    { device = "/dev/disk/by-uuid/e11806d0-7a2f-438e-a180-8ecdc4210a4e";
+#      fsType = "btrfs";
+#      options = [ "subvol=@home2" ];
+#    };
 
   fileSystems."/boot" =
     { device = "/dev/disk/by-uuid/F232-49D2";
