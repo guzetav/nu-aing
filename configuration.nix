@@ -166,7 +166,7 @@ fileSystems."/home/gustav/Documents" = {
 fileSystems."/home/gustav/Downloads" = {
   device = "/mnt/hdd/Downloads";
   fsType = "none";
-  options = [ "bind" ];
+  options = [ "bind" "x-gvfs-hide"];
   
 };
 
@@ -179,42 +179,42 @@ fileSystems."/home/gustav/Games" = {
 fileSystems."/home/gustav/Handphone" = {
   device = "/mnt/hdd/Handphone";
   fsType = "none";
-  options = [ "bind" ];
+  options = [ "bind" "x-gvfs-hide"];
   
 };
 
 fileSystems."/home/gustav/Music" = {
   device = "/mnt/hdd/Music";
   fsType = "none";
-  options = [ "bind" ];
+  options = [ "bind" "x-gvfs-hide"];
   
 };
 
 fileSystems."/home/gustav/Pictures" = {
   device = "/mnt/hdd/Pictures";
   fsType = "none";
-  options = [ "bind" ];
+  options = [ "bind" "x-gvfs-hide"];
   
 };
 
 fileSystems."/home/gustav/Software" = {
   device = "/mnt/hdd/Software";
   fsType = "none";
-  options = [ "bind" ];
+  options = [ "bind" "x-gvfs-hide"];
   
 };
 
 fileSystems."/home/gustav/TomoTrading" = {
   device = "/mnt/hdd/TomoTrading";
   fsType = "none";
-  options = [ "bind" ];
+  options = [ "bind" "x-gvfs-hide"];
   
 };
 
 fileSystems."/home/gustav/Videos" = {
   device = "/mnt/hdd/Videos";
   fsType = "none";
-  options = [ "bind" ];
+  options = [ "bind" "x-gvfs-hide"];
   
 };
   
