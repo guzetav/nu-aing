@@ -150,7 +150,7 @@
   # ============================================================================
   # 5. STORAGE & FILESYSTEMS (HDD & BTRFS)
   # ============================================================================
-  fileSystems."/home" = {
+  fileSystems."/home/gustav/Backup" = {
     device = "/dev/disk/by-uuid/e11806d0-7a2f-438e-a180-8ecdc4210a4e";
     fsType = "btrfs";
     options = [ "subvol=@home2" "compress=zstd" "noatime" "autodefrag" "space_cache=v2" ];
