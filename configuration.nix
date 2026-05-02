@@ -316,7 +316,7 @@ fileSystems."/home/gustav/Games" = {
         r="cd /etc/nixos && sudo git add . && sudo git commit -m 'update' && sudo nixos-rebuild switch --flake . && git push origin main";
         re = "reboot";
         clean = "sudo nix-collect-garbage -d && sudo nix-store --optimise";
-        ai = "gemini"
+        ai = "gemini";
     };
   };
 
