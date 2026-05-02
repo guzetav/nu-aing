@@ -64,8 +64,20 @@
 
 
   # --- VIRTUALISASI (KVM & Libvirtd) ---
-  virtualisation.libvirtd.enable = true;
-  security.polkit.enable = true; 
+  virtualisation = {
+  libvirtd.enable = true;
+  virtualbox.host = {
+    enable = true;
+    enableExtensionPack = true;
+  };
+};
+
+# Izin User
+users.users.gustav = {
+  extraGroups = [ "wheel" "networkmanager" "vboxusers" "libvirtd" ];
+};
+
+security.polkit.enable = true;
 
   # --- NETWORKING & KERNEL OPTIMIZATION ---
   networking.hostName = "nixos";
