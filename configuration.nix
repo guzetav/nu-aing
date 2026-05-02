@@ -310,12 +310,13 @@ fileSystems."/home/gustav/Games" = {
       source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
     '';
     shellAliases = {
-      c = "sudo xed /etc/nixos/configuration.nix"; 
-      h = "sudo xed /etc/nixos/home.nix";
-      f = "sudo xed /etc/nixos/flake.nix";
-      r="cd /etc/nixos && sudo git add . && sudo git commit -m 'update' && sudo nixos-rebuild switch --flake . && git push origin main";
-      re = "reboot";
-      clean = "sudo nix-collect-garbage -d && sudo nix-store --optimise";
+        c = "sudo xed /etc/nixos/configuration.nix"; 
+        h = "sudo xed /etc/nixos/home.nix";
+        f = "sudo xed /etc/nixos/flake.nix";
+        r="cd /etc/nixos && sudo git add . && sudo git commit -m 'update' && sudo nixos-rebuild switch --flake . && git push origin main";
+        re = "reboot";
+        clean = "sudo nix-collect-garbage -d && sudo nix-store --optimise";
+        ai = "gemini"
     };
   };
 
@@ -349,7 +350,8 @@ fileSystems."/home/gustav/Games" = {
     terminus_font
     pkgs.mint-themes
     ntfs3g
-    gemini-cli    
+    gemini-cli
+    zsh-completiions    
 
 
 
