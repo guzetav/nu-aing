@@ -110,6 +110,10 @@
     };
   };
 
+# thumbnail nemo    
+services.gnome.gnome-keyring.enable = true;
+programs.dconf.enable = true;
+
   services.xserver.displayManager.lightdm = {
     enable = true;
     greeters.slick.enable = true;
@@ -360,7 +364,7 @@ fileSystems."/home/gustav/Videos" = {
     gnome-disk-utility gparted telegram-desktop gnome-software
     gnome-boxes virt-viewer samba cifs-utils numlockx
     xorg.xrdb terminus_font pkgs.mint-themes ntfs3g
-    gemini-cli zsh-completions btop
+    gemini-cli zsh-completions btop ffmpegthumbnailer
 
 
 
