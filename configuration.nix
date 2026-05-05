@@ -197,7 +197,7 @@
   # 8. USERS & LOKALISASI (FIX ROFI LOCALE ERROR)
   # ============================================================================
   time.timeZone = "Asia/Tokyo";
-  i18n.defaultLocale = "en_US.UTF-8";
+  i18n.supportedLocale = "en_US.UTF-8";
   i18n.extraLocaleSettings = {
     LC_ALL = "en_US.UTF-8"; # Memaksa semua kategori ke UTF-8
     LC_ADDRESS = "en_US.UTF-8";
@@ -278,7 +278,7 @@
     gnome-boxes virt-viewer samba cifs-utils numlockx
     xorg.xrdb terminus_font pkgs.mint-themes ntfs3g
     gemini-cli zsh-completions btop ffmpegthumbnailer
-    fd fzf libnotify rofi rofi-calc rofi-emoji
+    fd fzf libnotify rofi rofi-calc rofi-emoji glibcLocales
   ];
 
   fonts.packages = with pkgs; [
