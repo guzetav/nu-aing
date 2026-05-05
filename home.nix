@@ -7,10 +7,8 @@
   home.sessionPath = ["$HOME/.local/bin"];
 
   home.packages = with pkgs; [
-    # Plank Reloaded dan Bamf sudah dihapus dari sini
+    
   ];
-
-  # Bagian autostart Plank (systemd service) sudah dihapus
 
   programs.git = {
     enable = true;

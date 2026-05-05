@@ -8,16 +8,13 @@
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    # Tambahkan ini:
-    plank-reloaded.url = "github:zquestz/plank-reloaded";
   };
 
-  outputs = { self, nixpkgs, home-manager, plank-reloaded, ... }@inputs: {
+  outputs = { self, nixpkgs, home-manager, ... }@inputs: {
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
-      # Kita teruskan 'plank-reloaded' melalui specialArgs
-      specialArgs = { inherit inputs plank-reloaded; }; 
+      # Meneruskan inputs ke module lain (seperti configuration.nix dan home.nix)
+      specialArgs = { inherit inputs; }; 
       modules = [
         ./configuration.nix
         home-manager.nixosModules.home-manager
@@ -25,7 +22,7 @@
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.users.gustav = import ./home.nix;
-          home-manager.extraSpecialArgs = { inherit inputs plank-reloaded; };
+          home-manager.extraSpecialArgs = { inherit inputs; };
         }
       ];
     };
