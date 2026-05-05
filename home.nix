@@ -7,7 +7,7 @@
 
   home.packages = with pkgs; [
     inputs.plank-reloaded.defaultPackage.${pkgs.system}
-    pkgs.libbamf
+    bamf
     
     # Tambahkan Ulauncher di sini
     ulauncher
