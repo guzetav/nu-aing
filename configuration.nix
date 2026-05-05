@@ -52,7 +52,7 @@
   };
 
   # ============================================================================
-  # 2. NETWORKING, DNS (ADGUARD), & OPTIMIZATION
+  # 2. NETWORKING & OPTIMIZATION
   # ============================================================================
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
@@ -81,7 +81,7 @@
   systemd.services.NetworkManager-wait-online.enable = false;
 
   # ============================================================================
-  # 3. DESKTOP ENVIRONMENT & GRAPHICS
+  # 3. DESKTOP ENVIRONMENT (CINNAMON)
   # ============================================================================
   services.xserver = {
     enable = true;
@@ -105,24 +105,15 @@
     };
   };
 
-  services.gnome.gnome-keyring.enable = true;
-  programs.dconf.enable = true;
-
   services.xserver.displayManager.lightdm = {
     enable = true;
     greeters.slick.enable = true;
   };
 
+  services.gnome.gnome-keyring.enable = true;
+  programs.dconf.enable = true;
   services.flatpak.enable = true;
-  services.packagekit.enable = true;
   services.gvfs.enable = true;
-  xdg.portal = {
-    enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-    config.common.default = "gtk";
-  };
-
-  environment.cinnamon.excludePackages = with pkgs; [ celluloid ];
 
   hardware.graphics = {
     enable = true;
@@ -131,11 +122,9 @@
   hardware.enableAllFirmware = true;
 
   # ============================================================================
-  # 4. AUDIO & PRINTING
+  # 4. AUDIO (PIPEWIRE)
   # ============================================================================
-  services.printing.enable = true;
   security.rtkit.enable = true;
-  services.pulseaudio.enable = false;
   services.pipewire = {
     enable = true;
     alsa.enable = true;
@@ -144,7 +133,28 @@
   };
 
   # ============================================================================
-  # 5. STORAGE & FILESYSTEMS (HDD & BTRFS)
+  # 5. USERS & LOKALISASI (FIXED)
+  # ============================================================================
+  time.timeZone = "Asia/Tokyo";
+  
+  # Perbaikan Error Locale: Menggunakan opsi yang benar
+  i18n.defaultLocale = "en_US.UTF-8";
+  i18n.supportedLocales = [ "en_US.UTF-8/UTF-8" "ja_JP.UTF-8/UTF-8" ];
+
+  users.users.gustav = {
+    isNormalUser = true;
+    extraGroups = [ "networkmanager" "wheel" "libvirtd" "kvm" "samba" "video" "render" ];
+    shell = pkgs.zsh;
+  };
+
+  i18n.inputMethod = {
+    enable = true;
+    type = "fcitx5";
+    fcitx5.addons = with pkgs; [ fcitx5-mozc fcitx5-gtk qt6Packages.fcitx5-configtool ];
+  };
+
+  # ============================================================================
+  # 6. STORAGE & FILESYSTEMS (BTRFS BINDS)
   # ============================================================================
   fileSystems."/mnt/hdd" = {
     device = "/dev/disk/by-uuid/e11806d0-7a2f-438e-a180-8ecdc4210a4e";
@@ -165,94 +175,24 @@
   fileSystems."/home/gustav/Software" = { device = "/mnt/hdd/Software"; fsType = "none"; options = [ "bind" "x-gvfs-hide"]; };
   fileSystems."/home/gustav/TomoTrading" = { device = "/mnt/hdd/TomoTrading"; fsType = "none"; options = [ "bind" "x-gvfs-hide"]; };
   fileSystems."/home/gustav/Videos" = { device = "/mnt/hdd/Videos"; fsType = "none"; options = [ "bind" "x-gvfs-hide"]; };
-  
-  # ============================================================================
-  # 6. FILE SHARING (SAMBA & AVAHI)
-  # ============================================================================
-  services.samba = {
-    enable = true;
-    openFirewall = true;
-    settings = {
-      global = { "workgroup" = "WORKGROUP"; "security" = "user"; "map to guest" = "bad user"; };
-      NuAing = { "path" = "/home/gustav/"; "browseable" = "yes"; "read only" = "no"; "guest ok" = "yes"; "force user" = "gustav"; };
-    };
-  };
-
-  services.samba.nmbd.enable = false;
-  systemd.services.samba-smbd.wantedBy = lib.mkForce [ "multi-user.target" ];
-
-  services.avahi = {
-    enable = true;
-    nssmdns4 = true;
-    publish = { enable = true; addresses = true; userServices = true; };
-  };
 
   # ============================================================================
-  # 7. VIRTUALISASI & SECURITY
-  # ============================================================================
-  virtualisation.libvirtd.enable = true;
-  security.polkit.enable = true;
-
-  # ============================================================================
-  # 8. USERS & LOKALISASI (FIX ROFI LOCALE ERROR)
-  # ============================================================================
-  time.timeZone = "Asia/Tokyo";
-  i18n.supportedLocales = ["en_US.UTF-8"];
-  i18n.extraLocaleSettings = {
-    LC_ALL = "en_US.UTF-8"; # Memaksa semua kategori ke UTF-8
-    LC_ADDRESS = "en_US.UTF-8";
-    LC_IDENTIFICATION = "en_US.UTF-8";
-    LC_MEASUREMENT = "en_US.UTF-8";
-    LC_MONETARY = "en_US.UTF-8";
-    LC_NAME = "en_US.UTF-8";
-    LC_NUMERIC = "en_US.UTF-8";
-    LC_PAPER = "en_US.UTF-8";
-    LC_TELEPHONE = "en_US.UTF-8";
-    LC_TIME = "en_US.UTF-8";
-  };
-
-  users.users.gustav = {
-    isNormalUser = true;
-    extraGroups = [ "networkmanager" "wheel" "libvirtd" "kvm" "samba" "video" "render" "vboxusers" ];
-    shell = pkgs.zsh;
-  };
-
-  nix.settings.trusted-users = [ "root" "gustav" ];
-
-  i18n.inputMethod = {
-    enable = true;
-    type = "fcitx5";
-    fcitx5.addons = with pkgs; [ fcitx5-mozc fcitx5-gtk qt6Packages.fcitx5-configtool ];
-  };
-
-  # ============================================================================
-  # 9. PROGRAMS & GAMING
+  # 7. PROGRAMS (ZSH, STEAM, ULAUNCHER)
   # ============================================================================
   programs.steam.enable = true;
-  programs.gamemode.enable = true;
-
   programs.zsh = {
     enable = true;
     enableCompletion = true;
     autosuggestions.enable = true;
     syntaxHighlighting.enable = true;
-    interactiveShellInit = ''
-      export TERM="xterm-256color"
-      source ${pkgs.fzf}/share/fzf/completion.zsh
-      source ${pkgs.fzf}/share/fzf/key-bindings.zsh
-      export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
-      export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-    '';
     ohMyZsh = {
       enable = true;
       plugins = [ "git" "sudo" ];
     };
     promptInit = "source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
     shellAliases = {
-      hc = "sudo xed /etc/nixos/hardware-configuration.nix";
       c = "sudo xed /etc/nixos/configuration.nix"; 
       h = "sudo xed /etc/nixos/home.nix";
-      f = "sudo xed /etc/nixos/flake.nix";
       r = "cd /etc/nixos && sudo git add . && sudo git commit -m 'update' && sudo nixos-rebuild switch --flake . && git push origin main";
       re = "reboot";
       clean = "sudo nix-collect-garbage -d && sudo nix-store --optimise";
@@ -261,38 +201,27 @@
   };
 
   # ============================================================================
-  # 10. SYSTEM PACKAGES, FONTS & VARIABLES
+  # 8. SYSTEM PACKAGES
   # ============================================================================
   nixpkgs.config.allowUnfree = true;
-
-  environment.variables = {
-    FZF_DEFAULT_COMMAND = "fd --type f";
-    LANG = "en_US.UTF-8";
-    LOCALE_ARCHIVE = "/run/current-system/sw/lib/locale/locale-archive";
-  };
 
   environment.systemPackages = with pkgs; [
     google-chrome wget htop fastfetch git
     zsh-powerlevel10k heroic xarchiver zip unzip p7zip
-    gnome-disk-utility gparted telegram-desktop gnome-software
-    gnome-boxes virt-viewer samba cifs-utils numlockx
-    xorg.xrdb terminus_font pkgs.mint-themes ntfs3g
-    gemini-cli zsh-completions btop ffmpegthumbnailer
-    fd fzf libnotify rofi rofi-calc rofi-emoji glibcLocales
-  ];
-
-  fonts.packages = with pkgs; [
-    jetbrains-mono roboto vista-fonts nerd-fonts.jetbrains-mono
+    gnome-disk-utility gparted telegram-desktop
+    samba cifs-utils numlockx fzf fd libnotify
+    
+    # Launcher pilihanmu
+    ulauncher
   ];
 
   # ============================================================================
-  # 11. MAINTENANCE & AUTO-CLEANUP
+  # 9. NIX SETTINGS & MAINTENANCE
   # ============================================================================
-  system.autoUpgrade.enable = true;
-
   nix.settings = {
     auto-optimise-store = true;
     experimental-features = [ "nix-command" "flakes" ];
+    trusted-users = [ "root" "gustav" ];
   };
 
   nix.gc = {
