@@ -7,28 +7,20 @@
   home.sessionPath = ["$HOME/.local/bin"];
 
   home.packages = with pkgs; [
-    inputs.plank-reloaded.defaultPackage.${pkgs.system}
-    bamf
+    # Plank Reloaded dan Bamf sudah dihapus dari sini
   ];
 
-  # Autostart untuk Plank
-  systemd.user.services.plank = {
-    Unit = {
-      Description = "Plank Dock Reloaded";
-      After = [ "graphical-session-pre.target" ];
-      PartOf = [ "graphical-session.target" ];
-    };
-    Service = {
-      ExecStart = "${inputs.plank-reloaded.defaultPackage.${pkgs.system}}/bin/plank";
-      Restart = "on-failure";
-    };
-    Install = { WantedBy = [ "graphical-session.target" ]; };
-  };
+  # Bagian autostart Plank (systemd service) sudah dihapus
 
   programs.git = {
     enable = true;
-    userName = "guzetav"; 
-    userEmail = "agelegend@yahoo.com";
+    # Struktur terbaru untuk NixOS 25.11
+    settings = {
+      user = {
+        name = "guzetav";
+        email = "agelegend@yahoo.com";
+      };
+    };
   };
 
   programs.home-manager.enable = true;
