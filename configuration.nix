@@ -110,9 +110,9 @@
     };
   };
 
-# thumbnail nemo    
-services.gnome.gnome-keyring.enable = true;
-programs.dconf.enable = true;
+  # thumbnail nemo    
+  services.gnome.gnome-keyring.enable = true;
+  programs.dconf.enable = true;
 
   services.xserver.displayManager.lightdm = {
     enable = true;
@@ -160,67 +160,59 @@ programs.dconf.enable = true;
     options = [ "subvol=@backup" "compress=zstd" "noatime" "autodefrag" "space_cache=v2" "x-gvfs-hide" ];
   };
 
-fileSystems."/home/gustav/Documents" = {
-  device = "/mnt/hdd/Documents";
-  fsType = "none";
-  options = [ "bind" "x-gvfs-hide"];
-  
-};
+  fileSystems."/home/gustav/Documents" = {
+    device = "/mnt/hdd/Documents";
+    fsType = "none";
+    options = [ "bind" "x-gvfs-hide"];
+  };
 
-fileSystems."/home/gustav/Downloads" = {
-  device = "/mnt/hdd/Downloads";
-  fsType = "none";
-  options = [ "bind" "x-gvfs-hide"];
-  
-};
+  fileSystems."/home/gustav/Downloads" = {
+    device = "/mnt/hdd/Downloads";
+    fsType = "none";
+    options = [ "bind" "x-gvfs-hide"];
+  };
 
-fileSystems."/home/gustav/Games" = {
+  fileSystems."/home/gustav/Games" = {
     device = "/dev/disk/by-uuid/e11806d0-7a2f-438e-a180-8ecdc4210a4e";
     fsType = "btrfs";
     options = [ "subvol=@games" "compress=no" "noatime" "autodefrag" "space_cache=v2" "x-gvfs-hide" ];
   };
 
-fileSystems."/home/gustav/Handphone" = {
-  device = "/mnt/hdd/Handphone";
-  fsType = "none";
-  options = [ "bind" "x-gvfs-hide"];
-  
-};
+  fileSystems."/home/gustav/Handphone" = {
+    device = "/mnt/hdd/Handphone";
+    fsType = "none";
+    options = [ "bind" "x-gvfs-hide"];
+  };
 
-fileSystems."/home/gustav/Music" = {
-  device = "/mnt/hdd/Music";
-  fsType = "none";
-  options = [ "bind" "x-gvfs-hide"];
-  
-};
+  fileSystems."/home/gustav/Music" = {
+    device = "/mnt/hdd/Music";
+    fsType = "none";
+    options = [ "bind" "x-gvfs-hide"];
+  };
 
-fileSystems."/home/gustav/Pictures" = {
-  device = "/mnt/hdd/Pictures";
-  fsType = "none";
-  options = [ "bind" "x-gvfs-hide"];
-  
-};
+  fileSystems."/home/gustav/Pictures" = {
+    device = "/mnt/hdd/Pictures";
+    fsType = "none";
+    options = [ "bind" "x-gvfs-hide"];
+  };
 
-fileSystems."/home/gustav/Software" = {
-  device = "/mnt/hdd/Software";
-  fsType = "none";
-  options = [ "bind" "x-gvfs-hide"];
-  
-};
+  fileSystems."/home/gustav/Software" = {
+    device = "/mnt/hdd/Software";
+    fsType = "none";
+    options = [ "bind" "x-gvfs-hide"];
+  };
 
-fileSystems."/home/gustav/TomoTrading" = {
-  device = "/mnt/hdd/TomoTrading";
-  fsType = "none";
-  options = [ "bind" "x-gvfs-hide"];
-  
-};
+  fileSystems."/home/gustav/TomoTrading" = {
+    device = "/mnt/hdd/TomoTrading";
+    fsType = "none";
+    options = [ "bind" "x-gvfs-hide"];
+  };
 
-fileSystems."/home/gustav/Videos" = {
-  device = "/mnt/hdd/Videos";
-  fsType = "none";
-  options = [ "bind" "x-gvfs-hide"];
-  
-};
+  fileSystems."/home/gustav/Videos" = {
+    device = "/mnt/hdd/Videos";
+    fsType = "none";
+    options = [ "bind" "x-gvfs-hide"];
+  };
   
   # ============================================================================
   # 6. FILE SHARING (SAMBA & AVAHI)
@@ -333,6 +325,12 @@ fileSystems."/home/gustav/Videos" = {
     syntaxHighlighting.enable = true;
     interactiveShellInit = ''
       export TERM="xterm-256color"
+
+      # FZF Integration
+      source ${pkgs.fzf}/share/fzf/completion.zsh
+      source ${pkgs.fzf}/share/fzf/key-bindings.zsh
+      export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
+      export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
     '';
     ohMyZsh = {
       enable = true;
@@ -342,7 +340,7 @@ fileSystems."/home/gustav/Videos" = {
       source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
     '';
     shellAliases = {
-      ho = "sudo xed /etc/nixos/hardware-configuration.nix";
+      hc = "sudo xed /etc/nixos/hardware-configuration.nix";
       c = "sudo xed /etc/nixos/configuration.nix"; 
       h = "sudo xed /etc/nixos/home.nix";
       f = "sudo xed /etc/nixos/flake.nix";
@@ -365,11 +363,7 @@ fileSystems."/home/gustav/Videos" = {
     gnome-boxes virt-viewer samba cifs-utils numlockx
     xorg.xrdb terminus_font pkgs.mint-themes ntfs3g
     gemini-cli zsh-completions btop ffmpegthumbnailer
-
-
-
-
-
+    fd fzf # Added for fast search
   ];
 
   fonts.packages = with pkgs; [

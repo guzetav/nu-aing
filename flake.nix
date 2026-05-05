@@ -2,34 +2,30 @@
   description = "Konfigurasi NixOS dengan Flakes + Home Manager 25.11";
 
   inputs = {
-    # Mengunci ke NixOS 25.11
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11"; 
 
-    # Home Manager source - Arahkan ke branch yang sama dengan nixpkgs
     home-manager = {
-      # Menambahkan '/release-25.11' untuk memastikan kecocokan versi
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # Tambahkan ini:
+    plank-reloaded.url = "github:zquestz/plank-reloaded";
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs: {
-    # Pastikan 'nixos' sesuai dengan hostname di configuration.nix
+  outputs = { self, nixpkgs, home-manager, plank-reloaded, ... }@inputs: {
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
-      specialArgs = { inherit inputs; };
+      # Kita teruskan 'plank-reloaded' melalui specialArgs
+      specialArgs = { inherit inputs plank-reloaded; }; 
       modules = [
         ./configuration.nix
-        
         home-manager.nixosModules.home-manager
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          
-          # User 'gustav' sesuai dengan warning tadi
           home-manager.users.gustav = import ./home.nix;
-
-          home-manager.extraSpecialArgs = { inherit inputs; };
+          home-manager.extraSpecialArgs = { inherit inputs plank-reloaded; };
         }
       ];
     };

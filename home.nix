@@ -1,31 +1,52 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
-  # Ganti dengan username kamu
   home.username = "gustav";
   home.homeDirectory = "/home/gustav";
-
-  # Jangan diubah kecuali kamu tahu apa yang kamu lakukan
   home.stateVersion = "24.11"; 
 
-  # Paket-paket user
   home.packages = with pkgs; [
+    inputs.plank-reloaded.defaultPackage.${pkgs.system}
+    libbamf
     
+    # Tambahkan Ulauncher di sini
+    ulauncher
   ];
 
-  # Konfigurasi Git (Versi Terbaru agar tidak warning)
-  programs.git = {
-    enable = true;
-    settings = {
-      user = {
-        name = "guzetav"; # Ganti nama kamu
-        email = "agelegend@yahoo.com"; # Ganti email kamu
-      };
+  # Autostart untuk Plank (yang tadi)
+  systemd.user.services.plank = {
+    Unit = {
+      Description = "Plank Dock Reloaded";
+      After = [ "graphical-session-pre.target" ];
+      PartOf = [ "graphical-session.target" ];
     };
-    signing.format = "openpgp";
+    Service = {
+      ExecStart = "${inputs.plank-reloaded.defaultPackage.${pkgs.system}}/bin/plank";
+      Restart = "on-failure";
+    };
+    Install = { WantedBy = [ "graphical-session.target" ]; };
   };
 
-  # Program Home Manager itu sendiri
-  programs.home-manager.enable = true;
+  # Tambahkan Autostart untuk Ulauncher
+  systemd.user.services.ulauncher = {
+    Unit = {
+      Description = "Ulauncher Application Launcher";
+      After = [ "graphical-session-pre.target" ];
+      PartOf = [ "graphical-session.target" ];
+    };
+    Service = {
+      # --hide-window agar dia jalan di background saat startup
+      ExecStart = "${pkgs.ulauncher}/bin/ulauncher --hide-window";
+      Restart = "on-failure";
+    };
+    Install = { WantedBy = [ "graphical-session.target" ]; };
+  };
 
+  programs.git = {
+    enable = true;
+    userName = "guzetav"; 
+    userEmail = "agelegend@yahoo.com";
+  };
+
+  programs.home-manager.enable = true;
 }
