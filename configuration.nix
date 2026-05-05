@@ -197,7 +197,7 @@
   # 8. USERS & LOKALISASI (FIX ROFI LOCALE ERROR)
   # ============================================================================
   time.timeZone = "Asia/Tokyo";
-  i18n.supportedLocale = "en_US.UTF-8";
+  i18n.supportedLocales = "en_US.UTF-8";
   i18n.extraLocaleSettings = {
     LC_ALL = "en_US.UTF-8"; # Memaksa semua kategori ke UTF-8
     LC_ADDRESS = "en_US.UTF-8";
