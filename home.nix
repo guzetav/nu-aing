@@ -4,7 +4,7 @@
   home.username = "gustav";
   home.homeDirectory = "/home/gustav";
   home.stateVersion = "24.11"; 
-
+  home.sessionPath = ["$HOME/.local/bin"];
   home.packages = with pkgs; [
     inputs.plank-reloaded.defaultPackage.${pkgs.system}
     bamf
