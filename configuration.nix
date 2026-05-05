@@ -14,14 +14,13 @@
     systemd-boot = {
       enable = true;
       consoleMode = "max";
-      configurationLimit = 10; # Dibatasi hanya 10 snapshot
+      configurationLimit = 10;
     };
     efi.canTouchEfiVariables = true;
   };
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
   
-  # Silent Boot & AMD Early KMS
   boot.initrd.kernelModules = [ "amdgpu" ];
   boot.initrd.verbose = false;
   boot.consoleLogLevel = 0;
@@ -60,7 +59,6 @@
   networking.networkmanager.dns = lib.mkForce "none";
   networking.nameservers = [ "127.0.0.1" ];
 
-  # AdGuard Home (Agar port 53 tidak bentrok)
   services.adguardhome = {
     enable = true;
     openFirewall = true;
@@ -73,7 +71,6 @@
     '';
   };
 
-  # TCP Optimization (BBR)
   boot.kernel.sysctl = {
     "net.core.default_qdisc" = "fq";
     "net.ipv4.tcp_congestion_control" = "bbr";
@@ -110,7 +107,6 @@
     };
   };
 
-  # thumbnail nemo    
   services.gnome.gnome-keyring.enable = true;
   programs.dconf.enable = true;
 
@@ -119,7 +115,6 @@
     greeters.slick.enable = true;
   };
 
-  # Portal & Integration
   services.flatpak.enable = true;
   services.packagekit.enable = true;
   services.gvfs.enable = true;
@@ -131,7 +126,6 @@
 
   environment.cinnamon.excludePackages = with pkgs; [ celluloid ];
 
-  # Graphics Acceleration
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
@@ -160,59 +154,19 @@
     options = [ "subvol=@backup" "compress=zstd" "noatime" "autodefrag" "space_cache=v2" "x-gvfs-hide" ];
   };
 
-  fileSystems."/home/gustav/Documents" = {
-    device = "/mnt/hdd/Documents";
-    fsType = "none";
-    options = [ "bind" "x-gvfs-hide"];
-  };
-
-  fileSystems."/home/gustav/Downloads" = {
-    device = "/mnt/hdd/Downloads";
-    fsType = "none";
-    options = [ "bind" "x-gvfs-hide"];
-  };
-
+  fileSystems."/home/gustav/Documents" = { device = "/mnt/hdd/Documents"; fsType = "none"; options = [ "bind" "x-gvfs-hide"]; };
+  fileSystems."/home/gustav/Downloads" = { device = "/mnt/hdd/Downloads"; fsType = "none"; options = [ "bind" "x-gvfs-hide"]; };
   fileSystems."/home/gustav/Games" = {
     device = "/dev/disk/by-uuid/e11806d0-7a2f-438e-a180-8ecdc4210a4e";
     fsType = "btrfs";
     options = [ "subvol=@games" "compress=no" "noatime" "autodefrag" "space_cache=v2" "x-gvfs-hide" ];
   };
-
-  fileSystems."/home/gustav/Handphone" = {
-    device = "/mnt/hdd/Handphone";
-    fsType = "none";
-    options = [ "bind" "x-gvfs-hide"];
-  };
-
-  fileSystems."/home/gustav/Music" = {
-    device = "/mnt/hdd/Music";
-    fsType = "none";
-    options = [ "bind" "x-gvfs-hide"];
-  };
-
-  fileSystems."/home/gustav/Pictures" = {
-    device = "/mnt/hdd/Pictures";
-    fsType = "none";
-    options = [ "bind" "x-gvfs-hide"];
-  };
-
-  fileSystems."/home/gustav/Software" = {
-    device = "/mnt/hdd/Software";
-    fsType = "none";
-    options = [ "bind" "x-gvfs-hide"];
-  };
-
-  fileSystems."/home/gustav/TomoTrading" = {
-    device = "/mnt/hdd/TomoTrading";
-    fsType = "none";
-    options = [ "bind" "x-gvfs-hide"];
-  };
-
-  fileSystems."/home/gustav/Videos" = {
-    device = "/mnt/hdd/Videos";
-    fsType = "none";
-    options = [ "bind" "x-gvfs-hide"];
-  };
+  fileSystems."/home/gustav/Handphone" = { device = "/mnt/hdd/Handphone"; fsType = "none"; options = [ "bind" "x-gvfs-hide"]; };
+  fileSystems."/home/gustav/Music" = { device = "/mnt/hdd/Music"; fsType = "none"; options = [ "bind" "x-gvfs-hide"]; };
+  fileSystems."/home/gustav/Pictures" = { device = "/mnt/hdd/Pictures"; fsType = "none"; options = [ "bind" "x-gvfs-hide"]; };
+  fileSystems."/home/gustav/Software" = { device = "/mnt/hdd/Software"; fsType = "none"; options = [ "bind" "x-gvfs-hide"]; };
+  fileSystems."/home/gustav/TomoTrading" = { device = "/mnt/hdd/TomoTrading"; fsType = "none"; options = [ "bind" "x-gvfs-hide"]; };
+  fileSystems."/home/gustav/Videos" = { device = "/mnt/hdd/Videos"; fsType = "none"; options = [ "bind" "x-gvfs-hide"]; };
   
   # ============================================================================
   # 6. FILE SHARING (SAMBA & AVAHI)
@@ -223,28 +177,14 @@
     settings = {
       global = {
         "workgroup" = "WORKGROUP";
-        "server string" = "nixos-smb";
-        "netbios name" = "nixos";
         "security" = "user";
         "map to guest" = "bad user";
-        "extraConfig" = ''
-          vfs objects = catia fruit streams_xattr
-          fruit:aapl = yes
-          fruit:metadata = stream
-          fruit:model = MacSamba
-          fruit:posix_rename = yes
-          fruit:veto_appledouble = no
-          fruit:wipe_intentionally_left_blank_rfork = yes
-          fruit:delete_empty_adfiles = yes
-        '';
       };
       NuAing = {
         "path" = "/home/gustav/";
         "browseable" = "yes";
         "read only" = "no";
         "guest ok" = "yes";
-        "create mask" = "0644";
-        "directory mask" = "0755";
         "force user" = "gustav";
       };
     };
@@ -256,11 +196,7 @@
   services.avahi = {
     enable = true;
     nssmdns4 = true;
-    publish = {
-      enable = true;
-      addresses = true;
-      userServices = true;
-    };
+    publish = { enable = true; addresses = true; userServices = true; };
   };
 
   # ============================================================================
@@ -274,50 +210,27 @@
   # ============================================================================
   time.timeZone = "Asia/Tokyo";
   i18n.defaultLocale = "en_US.UTF-8";
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "en_GB.UTF-8";
-    LC_IDENTIFICATION = "en_GB.UTF-8";
-    LC_MEASUREMENT = "en_GB.UTF-8";
-    LC_MONETARY = "en_GB.UTF-8";
-    LC_NAME = "en_GB.UTF-8";
-    LC_NUMERIC = "en_GB.UTF-8";
-    LC_PAPER = "en_GB.UTF-8";
-    LC_TELEPHONE = "en_GB.UTF-8";
-    LC_TIME = "en_GB.UTF-8";
-  };
 
   users.users.gustav = {
     isNormalUser = true;
-    description = "gustav";
     extraGroups = [ "networkmanager" "wheel" "libvirtd" "kvm" "samba" "video" "render" "vboxusers" ];
     shell = pkgs.zsh;
   };
 
   nix.settings.trusted-users = [ "root" "gustav" ];
 
-  # Input Method (Japanese)
   i18n.inputMethod = {
     enable = true;
     type = "fcitx5";
-    fcitx5.addons = with pkgs; [
-      fcitx5-mozc
-      fcitx5-gtk
-      qt6Packages.fcitx5-configtool
-    ];
+    fcitx5.addons = with pkgs; [ fcitx5-mozc fcitx5-gtk qt6Packages.fcitx5-configtool ];
   };
 
   # ============================================================================
   # 9. PROGRAMS & GAMING
   # ============================================================================
-  programs.steam = {
-    enable = true;
-    remotePlay.openFirewall = true;
-    dedicatedServer.openFirewall = true;
-    localNetworkGameTransfers.openFirewall = true;
-  };
+  programs.steam.enable = true;
   programs.gamemode.enable = true;
 
-  # Zsh Configuration
   programs.zsh = {
     enable = true;
     enableCompletion = true;
@@ -325,8 +238,6 @@
     syntaxHighlighting.enable = true;
     interactiveShellInit = ''
       export TERM="xterm-256color"
-
-      # FZF Integration
       source ${pkgs.fzf}/share/fzf/completion.zsh
       source ${pkgs.fzf}/share/fzf/key-bindings.zsh
       export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
@@ -364,6 +275,11 @@
     xorg.xrdb terminus_font pkgs.mint-themes ntfs3g
     gemini-cli zsh-completions btop ffmpegthumbnailer
     fd fzf libnotify
+    
+    # Tambahan Rofi
+    rofi
+    rofi-calc
+    rofi-emoji
   ];
 
   fonts.packages = with pkgs; [
@@ -377,8 +293,6 @@
 
   nix.settings = {
     auto-optimise-store = true;
-    download-buffer-size = 134217728; 
-    max-jobs = "auto";
     experimental-features = [ "nix-command" "flakes" ];
   };
 
