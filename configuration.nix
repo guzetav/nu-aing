@@ -66,9 +66,7 @@
 
   services.resolved = {
     enable = true;
-    extraConfig = ''
-      DNSStubListener=no
-    '';
+    extraConfig = "DNSStubListener=no";
   };
 
   boot.kernel.sysctl = {
@@ -175,18 +173,8 @@
     enable = true;
     openFirewall = true;
     settings = {
-      global = {
-        "workgroup" = "WORKGROUP";
-        "security" = "user";
-        "map to guest" = "bad user";
-      };
-      NuAing = {
-        "path" = "/home/gustav/";
-        "browseable" = "yes";
-        "read only" = "no";
-        "guest ok" = "yes";
-        "force user" = "gustav";
-      };
+      global = { "workgroup" = "WORKGROUP"; "security" = "user"; "map to guest" = "bad user"; };
+      NuAing = { "path" = "/home/gustav/"; "browseable" = "yes"; "read only" = "no"; "guest ok" = "yes"; "force user" = "gustav"; };
     };
   };
 
@@ -206,10 +194,22 @@
   security.polkit.enable = true;
 
   # ============================================================================
-  # 8. USERS & LOKALISASI
+  # 8. USERS & LOKALISASI (FIX ROFI LOCALE ERROR)
   # ============================================================================
   time.timeZone = "Asia/Tokyo";
   i18n.defaultLocale = "en_US.UTF-8";
+  i18n.extraLocaleSettings = {
+    LC_ALL = "en_US.UTF-8"; # Memaksa semua kategori ke UTF-8
+    LC_ADDRESS = "en_US.UTF-8";
+    LC_IDENTIFICATION = "en_US.UTF-8";
+    LC_MEASUREMENT = "en_US.UTF-8";
+    LC_MONETARY = "en_US.UTF-8";
+    LC_NAME = "en_US.UTF-8";
+    LC_NUMERIC = "en_US.UTF-8";
+    LC_PAPER = "en_US.UTF-8";
+    LC_TELEPHONE = "en_US.UTF-8";
+    LC_TIME = "en_US.UTF-8";
+  };
 
   users.users.gustav = {
     isNormalUser = true;
@@ -247,9 +247,7 @@
       enable = true;
       plugins = [ "git" "sudo" ];
     };
-    promptInit = ''
-      source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
-    '';
+    promptInit = "source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
     shellAliases = {
       hc = "sudo xed /etc/nixos/hardware-configuration.nix";
       c = "sudo xed /etc/nixos/configuration.nix"; 
@@ -263,9 +261,15 @@
   };
 
   # ============================================================================
-  # 10. SYSTEM PACKAGES & FONTS
+  # 10. SYSTEM PACKAGES, FONTS & VARIABLES
   # ============================================================================
   nixpkgs.config.allowUnfree = true;
+
+  environment.variables = {
+    FZF_DEFAULT_COMMAND = "fd --type f";
+    LANG = "en_US.UTF-8";
+    LOCALE_ARCHIVE = "/run/current-system/sw/lib/locale/locale-archive";
+  };
 
   environment.systemPackages = with pkgs; [
     google-chrome wget htop fastfetch git
@@ -274,12 +278,7 @@
     gnome-boxes virt-viewer samba cifs-utils numlockx
     xorg.xrdb terminus_font pkgs.mint-themes ntfs3g
     gemini-cli zsh-completions btop ffmpegthumbnailer
-    fd fzf libnotify
-    
-    # Tambahan Rofi
-    rofi
-    rofi-calc
-    rofi-emoji
+    fd fzf libnotify rofi rofi-calc rofi-emoji
   ];
 
   fonts.packages = with pkgs; [
