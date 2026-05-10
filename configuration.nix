@@ -357,7 +357,7 @@
     gnome-boxes virt-viewer samba cifs-utils numlockx
     xorg.xrdb terminus_font pkgs.mint-themes ntfs3g
     gemini-cli zsh-completions btop ffmpegthumbnailer libnotify ulauncher
-    fzf fd plank ncdu yazi zoxide nix-sweep
+    fzf fd plank ncdu yazi zoxide nh
   ];
 
   fonts.packages = with pkgs; [
