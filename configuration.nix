@@ -375,7 +375,7 @@
   pamixer
   pavucontrol
   playerctl
-  nm-connection-editor
+  networkmanagerapplet
   lxqt-policykit
   #gnome-keyring
   xfce4-taskmanager
