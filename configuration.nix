@@ -370,7 +370,8 @@ settings = {
     xorg.xrdb terminus_font pkgs.mint-themes ntfs3g
     gemini-cli zsh-completions btop ffmpegthumbnailer libnotify
     fzf fd plank ncdu yazi zoxide nh alacritty 
-  labwc
+ly 
+ labwc
   waybar
   rofi            # Catatan: Untuk Wayland, disarankan pakai 'rofi-wayland'
   dunst
