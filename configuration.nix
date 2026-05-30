@@ -400,7 +400,7 @@
   ffmpeg
   
   matugen
-  mpv-mpris
+  mpvScripts.mpris
   swayimg
 
   # --- GTK / QT & Appearance Tools ---
