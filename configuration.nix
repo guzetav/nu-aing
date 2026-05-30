@@ -125,7 +125,8 @@ enable = true;
 settings = {
 	animation = "doom";
 	bigclock = true;
-
+};
+};
 
 
 
