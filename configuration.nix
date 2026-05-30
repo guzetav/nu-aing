@@ -406,8 +406,8 @@
   # --- GTK / QT & Appearance Tools ---
   qt5.qtwayland
   qt6.qtwayland
-  qt5ct
-  qt6ct
+  libsForQt5.qt5ct
+  qt6Packages.qt6ct
   adw-gtk3-theme       # Nama paket disesuaikan dengan nixpkgs
   papirus-icon-theme
   ];
