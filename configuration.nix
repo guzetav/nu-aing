@@ -412,7 +412,7 @@ settings = {
   # --- Media & Theme Tools ---
   imagemagick
   ffmpeg
-  
+  thunar
   matugen
   mpvScripts.mpris
   swayimg
