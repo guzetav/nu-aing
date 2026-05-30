@@ -302,7 +302,7 @@ settings = {
     isNormalUser = true;
     description = "gustav";
     extraGroups = [ "networkmanager" "wheel" "libvirtd" "kvm" "samba" "video" "render" "vboxusers" ];
-    shell = pkgs.zsh;
+    shell = pkgs.fish;
   };
 
   nix.settings.trusted-users = [ "root" "gustav" ];
@@ -352,10 +352,6 @@ settings = {
   programs.starship = {
     enable = true;
     # Kamu bisa menambahkan kustomisasi preset starship di sini jika mau
-  };
-
-  users.users.gustav = {
-    shell = pkgs.fish;
   };
 
 
