@@ -412,7 +412,7 @@ settings = {
   # --- Media & Theme Tools ---
   imagemagick
   ffmpeg
- pkgs.thunar
+  pkgs.xfce.thunar
   matugen
   mpvScripts.mpris
   swayimg
