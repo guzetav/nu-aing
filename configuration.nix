@@ -376,7 +376,7 @@
   pavucontrol
   playerctl
   networkmanagerapplet
-  lxqt-policykit
+  lxqt.lxqt-policykit
   #gnome-keyring
   xfce4-taskmanager
   alsa-utils
