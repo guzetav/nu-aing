@@ -106,7 +106,7 @@
     sessionPackages = [ pkgs.labwc ];
     defaultSession = "labwc";
     autoLogin = {
-      enable = true;
+      enable = false;
       user = "gustav";
     };
   };
