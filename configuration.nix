@@ -120,7 +120,7 @@
     greeters.slick.enable = true;
   };
 
-ly = {
+services.displayManager.ly = {
 enable = true;
 settings = {
 	animation = "doom";
