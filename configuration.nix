@@ -378,7 +378,7 @@
   networkmanagerapplet
   lxqt.lxqt-policykit
   #gnome-keyring
-  "xfce4-taskmanager"
+  pkgs."xfce4-taskmanager"
   alsa-utils
 
   # --- Clipboard & Screenshot/Recording ---
