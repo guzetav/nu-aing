@@ -408,7 +408,7 @@
   qt6.qtwayland
   libsForQt5.qt5ct
   qt6Packages.qt6ct
-  adw-gtk3-theme       # Nama paket disesuaikan dengan nixpkgs
+  adw-gtk3      # Nama paket disesuaikan dengan nixpkgs
   papirus-icon-theme
   ];
 
