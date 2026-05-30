@@ -91,7 +91,7 @@
   services.xserver = {
     enable = true;
     videoDrivers = [ "amdgpu" ];
-    desktopManager.cinnamon.enable = true;
+    desktopManager.cinnamon.enable = false;
     displayManager.setupCommands = "${pkgs.numlockx}/bin/numlockx on";
     displayManager.sessionCommands = ''
       ${pkgs.xorg.xrandr}/bin/xrandr --output HDMI-1 --mode 1920x1080
@@ -103,7 +103,7 @@
   };
 
   services.displayManager = {
-    defaultSession = "cinnamon";
+    defaultSession = "labwc";
     autoLogin = {
       enable = true;
       user = "gustav";
@@ -125,8 +125,9 @@
   services.gvfs.enable = true;
   xdg.portal = {
     enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-    config.common.default = "gtk";
+    wlr.enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-wlr ];
+    #config.common.default = "gtk";
   };
 
   environment.cinnamon.excludePackages = with pkgs; [ celluloid gnome-terminal ];
