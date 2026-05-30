@@ -427,7 +427,7 @@ settings = {
   ];
 
   fonts.packages = with pkgs; [
-    jetbrains-mono roboto vista-fonts nerd-fonts.jetbrains-mono
+    jetbrains-mono roboto vista-fonts nerd-fonts.jetbrains-mono nerd-fonts.fira-code
   ];
 
   # ============================================================================
