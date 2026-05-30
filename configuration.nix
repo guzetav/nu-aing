@@ -329,33 +329,36 @@ settings = {
   };
   programs.gamemode.enable = true;
 
-  # Zsh Configuration
-  programs.zsh = {
+# 1. Aktifkan Fish Shell
+  programs.fish = {
     enable = true;
-    enableCompletion = true;
-    autosuggestions.enable = true;
-    syntaxHighlighting.enable = true;
     interactiveShellInit = ''
-      export TERM="xterm-256color"
+      set -gx TERM "xterm-256color"
+      set -g fish_greeting ""
     '';
-    ohMyZsh = {
-      enable = true;
-      plugins = [ "git" "sudo" ];
-    };
-    promptInit = ''
-      source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
-    '';
+
     shellAliases = {
-      hc = "sudo xed /etc/nixos/hardware-configuration.nix";
-      c = "sudo xed /etc/nixos/configuration.nix"; 
-      h = "sudo xed /etc/nixos/home.nix";
-      f = "sudo xed /etc/nixos/flake.nix";
-      r = "cd /etc/nixos && sudo git add . && sudo git commit -m 'update' && sudo nixos-rebuild switch --flake . && git push origin main";
-      re = "reboot";
+      hc    = "sudo nano /etc/nixos/hardware-configuration.nix";
+      c     = "sudo nano /etc/nixos/configuration.nix";
+      h     = "sudo nano /etc/nixos/home.nix";
+      f     = "sudo nano /etc/nixos/flake.nix";
+      r     = "cd /etc/nixos && sudo git add . && sudo git commit -m 'update' && sudo nixos-rebuild switch --flake . && sudo git push";
+      re    = "reboot";
       clean = "sudo nix-collect-garbage -d && sudo nix-store --optimise";
-      ai = "gemini";
+      ai    = "gemini";
     };
   };
+
+  programs.starship = {
+    enable = true;
+    # Kamu bisa menambahkan kustomisasi preset starship di sini jika mau
+  };
+
+  users.users.gustav = {
+    shell = pkgs.fish;
+  };
+
+
 
   # ============================================================================
   # 10. SYSTEM PACKAGES & FONTS
@@ -370,8 +373,10 @@ settings = {
     xorg.xrdb terminus_font pkgs.mint-themes ntfs3g
     gemini-cli zsh-completions btop ffmpegthumbnailer libnotify
     fzf fd plank ncdu yazi zoxide nh alacritty 
-ly 
- labwc
+  sublime
+  
+  ly 
+  labwc
   waybar
   rofi            # Catatan: Untuk Wayland, disarankan pakai 'rofi-wayland'
   dunst
