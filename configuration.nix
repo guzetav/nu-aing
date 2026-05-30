@@ -26,7 +26,7 @@
   boot.initrd.verbose = false;
   boot.consoleLogLevel = 0;
   boot.kernelParams = [ 
-    "video=1920x1080@60" 
+    "video=1920x1080@75" 
     "quiet" 
     "splash" 
     "vt.global_cursor_default=0" 
@@ -129,7 +129,7 @@
     config.common.default = "gtk";
   };
 
-  environment.cinnamon.excludePackages = with pkgs; [ celluloid ];
+  environment.cinnamon.excludePackages = with pkgs; [ celluloid gnome-terminal ];
 
   # Graphics Acceleration
   hardware.graphics = {
@@ -356,8 +356,60 @@
     gnome-disk-utility gparted telegram-desktop gnome-software
     gnome-boxes virt-viewer samba cifs-utils numlockx
     xorg.xrdb terminus_font pkgs.mint-themes ntfs3g
-    gemini-cli zsh-completions btop ffmpegthumbnailer libnotify ulauncher
-    fzf fd plank ncdu yazi zoxide nh alacritty kitty
+    gemini-cli zsh-completions btop ffmpegthumbnailer libnotify
+    fzf fd plank ncdu yazi zoxide nh alacritty 
+  labwc
+  waybar
+  rofi            # Catatan: Untuk Wayland, disarankan pakai 'rofi-wayland'
+  dunst
+  swww
+  swayidle
+  hyprlock
+
+  # --- XDG & Portals ---
+  #xdg-desktop-portal
+  xdg-desktop-portal-wlr
+
+  # --- System Utilities & Triggers ---
+  brightnessctl
+  pamixer
+  pavucontrol
+  playerctl
+  nm-connection-editor
+  lxqt-policykit
+  #gnome-keyring
+  xfce4-taskmanager
+  alsa-utils
+
+  # --- Clipboard & Screenshot/Recording ---
+  wl-clipboard
+  cliphist
+  wl-clip-persist
+  grim
+  slurp
+  wf-recorder
+
+  # --- Terminal & Shell Tools ---
+  
+  jq
+  netcat
+  python3Packages.watchdog # Di NixOS, python-watchdog biasanya dipanggil seperti ini
+
+  # --- Media & Theme Tools ---
+  imagemagick
+  ffmpeg
+  
+  matugen
+  mpv-mpris
+  swayimg
+
+  # --- GTK / QT & Appearance Tools ---
+  qt5.qtwayland
+  qt6.qtwayland
+  qt5ct
+  qt6ct
+  adw-gtk3-theme       # Nama paket disesuaikan dengan nixpkgs
+  papirus-icon-theme
   ];
 
   fonts.packages = with pkgs; [
