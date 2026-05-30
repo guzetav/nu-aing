@@ -103,6 +103,7 @@
   };
 
   services.displayManager = {
+    sessionPackages = [ pkgs.labwc ];
     defaultSession = "labwc";
     autoLogin = {
       enable = true;
@@ -115,9 +116,18 @@
   programs.dconf.enable = true;
 
   services.xserver.displayManager.lightdm = {
-    enable = true;
+    enable = false;
     greeters.slick.enable = true;
   };
+
+ly = {
+enable = true;
+settings = {
+	animation = "doom";
+	bigclock = true;
+
+
+
 
   # Portal & Integration
   services.flatpak.enable = true;
